@@ -1,24 +1,36 @@
 #include <bits/stdc++.h>
 using namespace std;
+int maxDistToClosest(vector<int>& seats) {
+	int left = -1;
+	int maxDis = 0;
 
-bool myComp(string &s1, string &s2) {
-	return s1 + s2 >  s2 + s1;
-}
-
-string printLargest(vector<string> &arr) {
-	sort(arr.begin(), arr.end(), myComp);
-	string ans = "";
-	for (auto &e : arr) {
-		ans += e;
+	for(int right = 0; right<seats.size();right++){
+		if(seats[right] == 1){
+			if(left == -1) maxDis = right;
+			else{
+				maxDis = max(maxDis, (right-left)/2);
+			}
+			left = right;
+		}
 	}
-	return ans;
+
+	int n = seats.size();
+
+	if(seats[seats.size()-1] == 0){
+		maxDis = max(maxDis, n - left -1);
+	}
+
+
+	return maxDis;
 }
 
 int main() {
 
-	int N = 5;
-	vector<string> Arr = {"3", "30", "34", "5", "9"};
+	vector<int> seats ={1,0,0,0,1,0,1};
 
-	cout << printLargest(Arr) << endl;
+	int ans = maxDistToClosest(seats);
+
+	cout<<ans<<endl;
+
 	return 0;
 }
