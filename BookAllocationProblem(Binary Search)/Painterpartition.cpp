@@ -3,9 +3,9 @@ using namespace std;
 
 #define ll long long
 
-bool isPossible(int arr[], int n, int k, ll mid) {
+bool isPossible(int arr[], int n, int k, long long mid) {
 	int painter = 1;
-	ll curr = 0;
+	long long curr = 0;
 	for (int i = 0; i < n; i++) {
 		if (arr[i] > mid) return false;
 		if (arr[i] + curr > mid) {
@@ -20,21 +20,21 @@ bool isPossible(int arr[], int n, int k, ll mid) {
 
 long long minTime(int arr[], int n, int k)
 {
-	ll mx = INT_MIN;
-	ll sum = 0;
+	long long mx = INT_MIN;
+	long long sum = 0;
 
 	for (int i = 0; i < n; i++) {
 		sum += arr[i];
 		mx = mx >= arr[i] ? mx : arr[i];
 	}
 
-	ll left = mx;
-	ll right = sum;
+	long long left = mx;
+	long long right = sum;
 
-	ll res = -1;
+	long long res = -1;
 
 	while (left <= right) {
-		ll mid = left + (right - left) / 2;
+		long long mid = left + (right - left) / 2;
 
 		if (isPossible(arr, n, k, mid)) {
 			res = mid;
